@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           GoogleFonts.poppinsTextTheme().apply(displayColor: kTextColor),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: Home()
+        home: LaunchApp()
     );
   }
 }

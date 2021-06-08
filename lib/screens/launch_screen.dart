@@ -19,12 +19,21 @@ class _LaunchAppState extends State<LaunchApp> {
 
     Timer(
         Duration(seconds: 3),
-            () => Navigator.push(
-            context,
-            PageTransition(
-                duration: Duration(milliseconds: 600),
-                type: PageTransitionType.fade,
-                child: SignUp())));
+            () =>
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SignUp()),
+              (Route<dynamic> route) => false,
+        ));
+
+            //     Navigator.push(
+            // context,
+            // PageTransition(
+            //     duration: Duration(milliseconds: 600),
+            //     type: PageTransitionType.fade,
+            //     child: SignUp())
+            //     ));
   }
 
 

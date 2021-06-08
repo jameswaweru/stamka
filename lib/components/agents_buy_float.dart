@@ -34,6 +34,8 @@ class _BuyFloatTabState extends State<BuyFloatTab> {
             maxLength: 12,
             maxLines: 1,
           ),
+          SizedBox(height: getProportionateScreenHeight(15),),
+          Text("Select top-up method"),
           Container(
             height: 90,
             width: double.infinity,

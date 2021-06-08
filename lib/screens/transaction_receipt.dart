@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stamka/components/default_button.dart';
+import 'package:stamka/screens/home.dart';
 
 import '../constants.dart';
 import '../size_config.dart';
@@ -40,20 +42,18 @@ class TransactionReceipt extends StatelessWidget {
                 bottom: 0,
                 left: 20,
                 right: 20,
-                child: Container(
-                  height: getProportionateScreenHeight(80),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.redAccent[400]
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Okay", style: TextStyle(color: Colors.black),)
-                    ],
-                  ),
-                )
+                child: DefaultButton(
+                  text: "Okay",
+                  press: (){
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()),
+                          (Route<dynamic> route) => false,
+                    );
+                  },
+                  height: getProportionateScreenHeight(65),
+                ),
+
             )
           ],
         )
