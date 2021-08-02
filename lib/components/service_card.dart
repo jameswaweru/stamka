@@ -31,12 +31,12 @@ class ServiceCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Container(
-            height: getProportionateScreenHeight(50),
+            height: getProportionateScreenHeight(85),
             width: getProportionateScreenWidth(100),
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(serviceImage),
-                    fit: BoxFit.cover
+                    fit: BoxFit.contain
                 )
             ),
           ),

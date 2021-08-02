@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stamka/screens/home.dart';
 import 'package:stamka/screens/launch_screen.dart';
 import 'package:stamka/screens/sign_up.dart';
+import 'package:stamka/utils/SharedPrefManager.dart';
 
 import 'constants.dart';
 
-void main() {
+// void main() {
+//   await SharedPrefManager.init();
+//   runApp(MyApp());
+// }
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  await SharedPrefManager.init();
   runApp(MyApp());
 }
 

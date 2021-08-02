@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stamka/components/agent_services.dart';
 import 'package:stamka/components/agents_buy_float.dart';
+import 'package:stamka/utils/SharedPrefManager.dart';
 
 import '../constants.dart';
 import '../size_config.dart';
@@ -13,6 +15,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   TabController _controller;
+  final formatCurrency = new NumberFormat.simpleCurrency();
 
   @override
   void initState() {
@@ -60,7 +63,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Good Morning John",
+                      "Good Morning "+SharedPrefManager.getAgentName(),
                       style: TextStyle(
                           fontFamily: 'Poppins',
                           color: Colors.black,
@@ -86,8 +89,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Your float balance is"),
-                                Text("Ksh: 1,234" , style: TextStyle(fontSize: 30),),
-                                Text("Your Earnings: Ksh 1,234.00" , style: TextStyle(fontWeight: FontWeight.bold),)
+                                //SharedPrefManager.getAgentBalance().isNotEmpty &&  ? "Ksh: "+formatCurrency.format(SharedPrefManager.getAgentBalance()) :
+                                Text(  "0.00" , style: TextStyle(fontSize: 30),),
+                                Text("Your Earnings: Ksh "+formatCurrency.format(1000) , style: TextStyle(fontWeight: FontWeight.bold),)
                               ],
                             ),
                             Column(

@@ -17,20 +17,23 @@ class DefaultButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return InkWell(
-      onTap: press,
-      child: Container(
-        height: height,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.redAccent[400]
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(text, style: TextStyle(color: Colors.black),)
-          ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: InkWell(
+        onTap: press,
+        child: Container(
+          height: height,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.redAccent[400]
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(text, style: TextStyle(color: Colors.black),)
+            ],
+          ),
         ),
       ),
     );

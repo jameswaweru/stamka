@@ -3,9 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:stamka/apis/token_apis.dart';
+import '../models/dto/generated_token_model.dart';
+import 'package:stamka/pages/login.dart';
+import 'package:stamka/pages/register.dart';
 import 'package:stamka/screens/sign_up.dart';
+import 'package:stamka/utils/SharedPrefManager.dart';
 
 import '../size_config.dart';
+import 'home.dart';
 
 class LaunchApp extends StatefulWidget {
   @override
@@ -14,18 +20,51 @@ class LaunchApp extends StatefulWidget {
 
 class _LaunchAppState extends State<LaunchApp> {
 
+  // Future<GeneratedToken> getNewToken() async {
+  //
+  // }
+
+  bool isAppActivated;
+  bool isRegistered;
+  Future<void> getToken() async {
+    print("my future function...");
+    GeneratedToken generatedToken = await TokenApis().generateToken();
+    print("Generated token..."+generatedToken.token);
+    SharedPrefManager.setGeneratedToken(generatedToken.token);
+
+    if(isAppActivated){
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => Home()),
+            (Route<dynamic> route) => false,
+      );
+    }else{
+
+      if(!isRegistered){
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => StamkaRegistration()),
+              (Route<dynamic> route) => false,
+        );
+      }
+
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => StamkaLogin()),
+            (Route<dynamic> route) => false,
+      );
+    }
+  }
+
+
   void initState() {
     super.initState();
 
-    Timer(
-        Duration(seconds: 3),
-            () =>
+    isAppActivated = SharedPrefManager.isAppActivated() ?? false;
+    isRegistered = SharedPrefManager.isRegistered() ?? false;
 
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => SignUp()),
-              (Route<dynamic> route) => false,
-        ));
+    getToken();
+
 
             //     Navigator.push(
             // context,
@@ -38,14 +77,18 @@ class _LaunchAppState extends State<LaunchApp> {
 
 
 
+
+
+
   @override
   Widget build(BuildContext context) {
+    print("Building launch page..");
     SizeConfig().init(context);
     return Scaffold(
         body: Container(
           width: SizeConfig.screenWidth,
           height: SizeConfig.screenHeight,
-          child: Column(
+          child:  Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
